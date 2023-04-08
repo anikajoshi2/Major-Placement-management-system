@@ -1,0 +1,26 @@
+{
+  "name": "placement-management-system",
+  "version": "1.0.0",
+  "description": "This project is made for managing the student data and other placement related activities for Acropolis Institute of Technology and Research. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alankar99/Major-Placement-management-system.git"
+  },
+  "author": "Alankar Jamle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alankar99/Major-Placement-management-system/issues"
+  },
+  "homepage": "https://github.com/Alankar99/Major-Placement-management-system#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "multer": "^1.4.5-lts.1"
+  }
+}
