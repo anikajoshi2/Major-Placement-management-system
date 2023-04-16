@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<br>
+<div class="container bootdey">
+<link rel="stylesheet" href="admin.css">  
+<div class="col-md-12">  
+    <div class="col-md-4">      
+        <div class="portlet light profile-sidebar-portlet bordered">
+            <div class="profile-userpic">
+                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-responsive" alt=""> </div>
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name"> Admin </div>
+            
+            </div>
+            
+            <div class="profile-usermenu">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#">
+                            <i class="icon-home"></i> Show Students </a>
+                    </li>
+                    <li>
+                        <a href="create-student.ejs">
+                            <i class="icon-settings"></i> Create a new user </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-info"></i> View upcoming Drives </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8"> 
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <i class="icon-globe theme-font hide"></i>
+                    <span class="caption-subject font-blue-madison bold uppercase">Students List</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <ul>
+      <% students.forEach((student) => { %>
+        <li>
+          <h2><%= student.name %></h2>
+          <p><strong>Roll Number:</strong> <%= student.enroll %></p>
+          <p><strong>Age:</strong> <%= student.age %></p>
+          <p><strong>Gender:</strong> <%= student.gender %></p>
+          <img src="uploads/<%= student.photo %>"alt="<%= student.name %>'s Profile Picture  ">
+          <img src="uploads/<%= student.offerLetter %>" alt="<%= student.name %>'s Offer Letter">
+          
+          <!-- Delete student -->
+          <!-- <form id="delete-form" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button>Delete</button>
+          </form> -->
+
+          <form onsubmit="deleteStudent(event, '<%= student._id %>')">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete Student</button>
+          </form>
+
+        </li>
+      <% }) %>
+    </ul>
+</body>
+
+<script>
+  function deleteStudent(event, studentId) {
+    event.preventDefault();
+    
+    fetch(`/students/${studentId}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("Student deleted successfully");
+        // do something else (e.g., redirect to a different page)
+        window.location.href = '/students'; // redirect to the students page
+        
+      } else {
+        console.error("Error deleting student");
+        // handle the error
+      }
+    })
+    .catch(error => {
+      console.error("Error deleting student", error);
+      // handle the error
+    });
+  }
+</script>
+    </div>
+</div>
+</div>
+
+</html>
+
+
+
+
